@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loyal Sports Fan</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Loyal Sports Fan</h1>
+    <p class="subtitle">Hide videos after your team loses</p>
+
+    <div class="form-group">
+      <label for="team-select">Select Your Team</label>
+      <select id="team-select">
+        <option value="">-- Choose a team --</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="hide-duration">Hide Duration (hours)</label>
+      <input type="number" id="hide-duration" min="1" max="168" value="24">
+      <span class="hint">How long to hide videos after a loss (1-168 hours)</span>
+    </div>
+
+    <div id="status-box" class="status-box hidden">
+      <div class="status-label">Team Status</div>
+      <div id="status-text" class="status-text"></div>
+      <div id="last-game" class="last-game"></div>
+    </div>
+
+    <button id="save-btn" class="save-btn">Save Settings</button>
+    <button id="check-btn" class="check-btn">Check Now</button>
+
+    <div id="message" class="message hidden"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
