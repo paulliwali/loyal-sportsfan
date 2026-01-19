@@ -40,7 +40,7 @@ label {
   color: #ccd6f6;
 }
 
-select, input[type="number"] {
+select, input[type="number"], input[type="password"] {
   width: 100%;
   padding: 10px 12px;
   font-size: 14px;
@@ -52,8 +52,17 @@ select, input[type="number"] {
   transition: border-color 0.2s;
 }
 
-select:focus, input[type="number"]:focus {
+select:focus, input[type="number"]:focus, input[type="password"]:focus {
   border-color: #64ffda;
+}
+
+.hint a {
+  color: #64ffda;
+  text-decoration: none;
+}
+
+.hint a:hover {
+  text-decoration: underline;
 }
 
 select option {

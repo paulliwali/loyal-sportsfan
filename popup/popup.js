@@ -35,6 +35,7 @@ const NBA_TEAMS = [
 // DOM elements
 const teamSelect = document.getElementById('team-select');
 const hideDuration = document.getElementById('hide-duration');
+const apiKeyInput = document.getElementById('api-key');
 const statusBox = document.getElementById('status-box');
 const statusText = document.getElementById('status-text');
 const lastGame = document.getElementById('last-game');
@@ -54,7 +55,7 @@ function populateTeams() {
 
 // Load saved settings
 async function loadSettings() {
-  const result = await chrome.storage.sync.get(['selectedTeam', 'hideDurationHours']);
+  const result = await chrome.storage.sync.get(['selectedTeam', 'hideDurationHours', 'apiKey']);
 
   if (result.selectedTeam) {
     teamSelect.value = result.selectedTeam.id;
@@ -62,6 +63,10 @@ async function loadSettings() {
 
   if (result.hideDurationHours) {
     hideDuration.value = result.hideDurationHours;
+  }
+
+  if (result.apiKey) {
+    apiKeyInput.value = result.apiKey;
   }
 
   // Load game state
@@ -99,6 +104,7 @@ function updateStatusDisplay(state, team) {
 async function saveSettings() {
   const teamId = parseInt(teamSelect.value);
   const duration = parseInt(hideDuration.value);
+  const apiKey = apiKeyInput.value.trim();
 
   if (!teamId) {
     showMessage('Please select a team', 'error');
@@ -114,7 +120,8 @@ async function saveSettings() {
 
   await chrome.storage.sync.set({
     selectedTeam: team,
-    hideDurationHours: duration
+    hideDurationHours: duration,
+    apiKey: apiKey
   });
 
   showMessage('Settings saved!', 'success');
