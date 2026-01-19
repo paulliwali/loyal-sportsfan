@@ -16,7 +16,7 @@ A Chrome extension that hides YouTube videos about your NBA team after a loss. S
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/loyal-sportsfan.git
+   git clone https://github.com/paulliwali/loyal-sportsfan.git
    ```
 
 2. Open Chrome and navigate to `chrome://extensions`
