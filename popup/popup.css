@@ -65,6 +65,63 @@ select:focus, input[type="number"]:focus, input[type="password"]:focus {
   text-decoration: underline;
 }
 
+.api-key-row {
+  display: flex;
+  gap: 8px;
+}
+
+.api-key-row input {
+  flex: 1;
+}
+
+.validate-btn {
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid #64ffda;
+  border-radius: 6px;
+  background: transparent;
+  color: #64ffda;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.validate-btn:hover {
+  background: rgba(100, 255, 218, 0.1);
+}
+
+.validate-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.api-key-status {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+
+.api-key-status.hidden {
+  display: none;
+}
+
+.api-key-status.valid {
+  background: rgba(100, 255, 218, 0.1);
+  color: #64ffda;
+}
+
+.api-key-status.invalid {
+  background: rgba(255, 107, 107, 0.1);
+  color: #ff6b6b;
+}
+
+.api-key-status.validating {
+  background: rgba(136, 146, 176, 0.1);
+  color: #8892b0;
+}
+
 select option {
   background: #0a192f;
   color: #fff;

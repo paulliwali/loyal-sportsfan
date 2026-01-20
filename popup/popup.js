@@ -36,12 +36,17 @@ const NBA_TEAMS = [
 const teamSelect = document.getElementById('team-select');
 const hideDuration = document.getElementById('hide-duration');
 const apiKeyInput = document.getElementById('api-key');
+const validateBtn = document.getElementById('validate-btn');
+const apiKeyStatus = document.getElementById('api-key-status');
 const statusBox = document.getElementById('status-box');
 const statusText = document.getElementById('status-text');
 const lastGame = document.getElementById('last-game');
 const saveBtn = document.getElementById('save-btn');
 const checkBtn = document.getElementById('check-btn');
 const message = document.getElementById('message');
+
+// API validation state
+let apiKeyValidated = false;
 
 // Populate team dropdown
 function populateTeams() {
@@ -116,6 +121,11 @@ async function saveSettings() {
     return;
   }
 
+  // Warn if API key entered but not validated
+  if (apiKey && !apiKeyValidated) {
+    showApiKeyStatus('⚠ API key not validated - click Validate to verify', 'invalid');
+  }
+
   const team = NBA_TEAMS.find(t => t.id === teamId);
 
   await chrome.storage.sync.set({
@@ -165,9 +175,67 @@ function showMessage(text, type) {
   }, 3000);
 }
 
+// Show API key status
+function showApiKeyStatus(text, type) {
+  apiKeyStatus.textContent = text;
+  apiKeyStatus.className = `api-key-status ${type}`;
+}
+
+// Validate API key
+async function validateApiKey() {
+  const apiKey = apiKeyInput.value.trim();
+
+  if (!apiKey) {
+    showApiKeyStatus('No API key entered', 'invalid');
+    apiKeyValidated = false;
+    return false;
+  }
+
+  validateBtn.textContent = 'Validating...';
+  validateBtn.disabled = true;
+  showApiKeyStatus('Validating API key...', 'validating');
+
+  try {
+    const response = await fetch('https://api.balldontlie.io/v1/teams', {
+      headers: { 'Authorization': apiKey }
+    });
+
+    if (response.ok) {
+      showApiKeyStatus('✓ API key is valid', 'valid');
+      apiKeyValidated = true;
+      validateBtn.textContent = 'Validate';
+      validateBtn.disabled = false;
+      return true;
+    } else if (response.status === 401) {
+      showApiKeyStatus('✗ Invalid API key', 'invalid');
+      apiKeyValidated = false;
+    } else if (response.status === 429) {
+      showApiKeyStatus('✗ Rate limited - try again later', 'invalid');
+      apiKeyValidated = false;
+    } else {
+      showApiKeyStatus(`✗ Error: ${response.status}`, 'invalid');
+      apiKeyValidated = false;
+    }
+  } catch (error) {
+    showApiKeyStatus('✗ Network error - check connection', 'invalid');
+    apiKeyValidated = false;
+  }
+
+  validateBtn.textContent = 'Validate';
+  validateBtn.disabled = false;
+  return false;
+}
+
+// Clear validation status when key changes
+apiKeyInput.addEventListener('input', () => {
+  apiKeyValidated = false;
+  apiKeyStatus.classList.add('hidden');
+});
+
 // Event listeners
 saveBtn.addEventListener('click', saveSettings);
 checkBtn.addEventListener('click', checkGameNow);
+validateBtn.addEventListener('click', validateApiKey);
 
 // Initialize
 populateTeams();

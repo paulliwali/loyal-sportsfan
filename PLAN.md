@@ -12,18 +12,19 @@ Core functionality is implemented:
 ## Tasks
 
 ### Documentation
-- [ ] Add CLAUDE.md - Development guidelines for AI assistants
-- [ ] Add README.md - Project documentation and setup instructions
+- [x] Add CLAUDE.md - Development guidelines for AI assistants
+- [x] Add README.md - Project documentation and setup instructions
 
 ### Repository Setup
-- [ ] Initialize git repository
-- [ ] Create initial commit
+- [x] Initialize git repository
+- [x] Create initial commit
 - [ ] Push to GitHub
 
 ### Missing Features (Future)
-- [ ] Add extension icons (assets/icons/)
-- [ ] Add API key input field in popup UI
-- [ ] Add rate limit error handling for balldontlie.io API
+- [x] Add extension icons (assets/icons/)
+- [x] Add API key input field in popup UI
+- [x] Add API key validation with test API call
+- [x] Add rate limit error handling for balldontlie.io API
 
 ## Technical Notes
 - Uses Chrome Manifest V3

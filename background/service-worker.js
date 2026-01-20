@@ -51,7 +51,13 @@ async function checkLastGame() {
     );
 
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+      if (response.status === 401) {
+        throw new Error('Invalid API key - please check your key in settings');
+      } else if (response.status === 429) {
+        throw new Error('Rate limited - add an API key for higher limits');
+      } else {
+        throw new Error(`API error: ${response.status}`);
+      }
     }
 
     const data = await response.json();

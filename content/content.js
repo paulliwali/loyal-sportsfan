@@ -60,12 +60,21 @@ function shouldHideVideos() {
   }
 
   if (!lastGameDate) {
+    console.log('Loyal Sports Fan: No lastGameDate set');
     return false;
   }
 
   const gameTime = new Date(lastGameDate).getTime();
   const now = Date.now();
   const hideDurationMs = hideDurationHours * 60 * 60 * 1000;
+  const hoursSinceGame = (now - gameTime) / (1000 * 60 * 60);
+
+  console.log('Loyal Sports Fan: Hide check', {
+    lastGameDate,
+    hoursSinceGame: hoursSinceGame.toFixed(1),
+    hideDurationHours,
+    shouldHide: hoursSinceGame < hideDurationHours
+  });
 
   // Check if we're still within the hide duration
   return (now - gameTime) < hideDurationMs;
@@ -120,7 +129,7 @@ function getVideoTitle(videoElement) {
 function processVideo(videoElement) {
   if (!isHiding) {
     // Make sure video is visible if we're not hiding
-    videoElement.style.display = '';
+    videoElement.style.cssText = '';
     videoElement.removeAttribute('data-loyal-hidden');
     return;
   }
@@ -133,7 +142,8 @@ function processVideo(videoElement) {
   const title = getVideoTitle(videoElement);
 
   if (containsTeamKeywords(title)) {
-    videoElement.style.display = 'none';
+    // Use !important to override YouTube's CSS
+    videoElement.style.cssText = 'display: none !important;';
     videoElement.setAttribute('data-loyal-hidden', 'true');
     console.log('Loyal Sports Fan: Hidden video -', title);
   }
@@ -150,7 +160,7 @@ function processExistingVideos() {
 
   // Show all previously hidden videos first
   document.querySelectorAll('[data-loyal-hidden]').forEach(el => {
-    el.style.display = '';
+    el.style.cssText = '';
     el.removeAttribute('data-loyal-hidden');
   });
 

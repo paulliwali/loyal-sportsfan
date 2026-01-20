@@ -26,7 +26,11 @@
 
     <div class="form-group">
       <label for="api-key">API Key (optional)</label>
-      <input type="password" id="api-key" placeholder="Enter balldontlie.io API key">
+      <div class="api-key-row">
+        <input type="password" id="api-key" placeholder="Enter balldontlie.io API key">
+        <button id="validate-btn" class="validate-btn" type="button">Validate</button>
+      </div>
+      <div id="api-key-status" class="api-key-status hidden"></div>
       <span class="hint">Get a free key at <a href="https://www.balldontlie.io" target="_blank">balldontlie.io</a> for higher rate limits</span>
     </div>
 
