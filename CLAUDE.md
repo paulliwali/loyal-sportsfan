@@ -26,16 +26,20 @@ loyal-sportsfan/
 - Contains `NBA_TEAMS` array with all 30 teams, IDs, and keywords
 - Manages user settings in `chrome.storage.sync`
 - Communicates with service worker via `chrome.runtime.sendMessage`
+- API key validation with test call to balldontlie.io
 
 ### service-worker.js
 - Fetches game results from `https://api.balldontlie.io/v1`
 - Runs hourly check via `chrome.alarms`
 - Stores game state in `chrome.storage.local`
+- Error handling for rate limits (429) and invalid API keys (401)
 
 ### content.js
 - Monitors YouTube DOM with MutationObserver
 - Hides videos matching team keywords when `lastGameResult === 'loss'`
+- Uses `!important` CSS to override YouTube's styles
 - Handles YouTube SPA navigation
+- Debug logging for hide duration checks
 
 ## Development Commands
 
