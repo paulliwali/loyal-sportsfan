@@ -9,7 +9,7 @@ A Chrome extension that hides YouTube videos about your NBA team after a loss. S
 - **Configurable Duration**: Choose how long to hide videos after a loss (1-168 hours)
 - **Automatic Updates**: Checks game results hourly
 - **YouTube Integration**: Works on home page, search results, recommendations, and Shorts
-- **API Key Support**: Optional balldontlie.io API key for higher rate limits with built-in validation
+- **API Key Support**: balldontlie.io API key with built-in validation
 
 ## Installation
 
@@ -37,7 +37,7 @@ Coming soon - pending review.
 1. Click the extension icon in your browser toolbar
 2. Select your NBA team from the dropdown
 3. Set how long you want videos hidden after a loss (default: 24 hours)
-4. (Optional) Enter a [balldontlie.io](https://www.balldontlie.io/) API key for higher rate limits and click **Validate**
+4. Enter your [balldontlie.io](https://www.balldontlie.io/) API key and click **Validate** (sign up for free to get a key)
 5. Click **Save Settings**
 
 The extension will automatically check your team's latest game result and hide relevant YouTube videos if they lost.
