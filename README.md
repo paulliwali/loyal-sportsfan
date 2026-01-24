@@ -15,7 +15,7 @@ A Chrome extension that hides YouTube videos about your NBA team after a loss. S
 
 ### From Chrome Web Store
 
-Coming soon - pending review.
+[Install from Chrome Web Store](https://chromewebstore.google.com/detail/loyal-sports-fan/iiienlhddfelfmcgmllcceaakkgggmij)
 
 ### From Source (Developer Mode)
 
